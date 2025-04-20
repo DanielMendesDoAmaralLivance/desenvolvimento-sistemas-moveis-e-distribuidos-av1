@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       routes: {AppRoutes.home: (context) => const HomePage()},
-      home: const InitialPage(),
+      // home: const InitialPage(), VOLTAR ISSO AQUI DEPOIS, TIREI SO PARA FICAR MAIS FACIL PARA FAZER TESTES
+      home: const HomePage(),
     );
   }
 }
