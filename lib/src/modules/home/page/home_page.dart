@@ -1,8 +1,11 @@
 import 'package:fast_location/src/modules/home/components/last_searched_address_data.dart';
 import 'package:fast_location/src/modules/home/components/last_searched_address_empty_state.dart';
 import 'package:fast_location/src/modules/home/controller/home_controller.dart';
+import 'package:fast_location/src/modules/home/model/address_model.dart';
 import 'package:fast_location/src/shared/colors/app_colors.dart';
-import 'package:fast_location/src/shared/components/appbar/custom_app_bar.dart';
+import 'package:fast_location/src/shared/components/address_list/address_list.dart';
+import 'package:fast_location/src/shared/components/address_list/address_list_item.dart';
+import 'package:fast_location/src/shared/components/app_bar/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -29,6 +32,116 @@ class _HomePageState extends State<HomePage> {
             _buildLastSearchedAddressSection(),
             const SizedBox(height: 20),
             _buildSearchAddressButton(),
+            AddressList(
+              addresses: [
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+                AddressModel(
+                  zipCode: "08320-170",
+                  publicPlace: "Rua João Mateus Rendon",
+                  neighborhood: "Parque São Rafael",
+                  locality: "São Paulo",
+                  state: "SP",
+                ),
+              ],
+            ),
           ],
         ),
       ),
