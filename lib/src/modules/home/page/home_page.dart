@@ -1,7 +1,10 @@
-import 'package:fast_location/src/modules/home/components/initial_search_address_component.dart';
+import 'package:fast_location/src/modules/home/components/last_searched_address_data.dart';
+import 'package:fast_location/src/modules/home/components/last_searched_address_empty_state.dart';
+import 'package:fast_location/src/modules/home/controller/home_controller.dart';
 import 'package:fast_location/src/shared/colors/app_colors.dart';
 import 'package:fast_location/src/shared/components/appbar/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,12 +14,114 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _controller = HomeController();
+  final _zipCodeController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
       backgroundColor: AppColors.background,
-      body: InitialSearchAddressComponent(),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            _buildLastSearchedAddressSection(),
+            const SizedBox(height: 20),
+            _buildSearchAddressButton(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLastSearchedAddressSection() {
+    return Observer(
+      builder: (_) {
+        var lastAddressSearched = _controller.lastAddressSearched;
+
+        return lastAddressSearched != null
+            ? LastSearchedAddressData(lastSearchedAddress: lastAddressSearched)
+            : LastSearchedAddressEmptyState();
+      },
+    );
+  }
+
+  Widget _buildSearchAddressButton() {
+    return ElevatedButton(
+      onPressed: () => _showSearchAddressFromZipCodeDialog(context),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.theme,
+        minimumSize: const Size(double.infinity, 50),
+      ),
+      child: const Text(
+        'Localizar endereço',
+        style: TextStyle(fontSize: 16, color: Colors.white),
+      ),
+    );
+  }
+
+  void _showSearchAddressFromZipCodeDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Digite o CEP",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _zipCodeController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: "00000000",
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.theme, width: 2),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.theme, width: 2),
+                    ),
+                  ),
+                  maxLength: 8,
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _controller.searchAddress(_zipCodeController.text);
+
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.theme,
+                    ),
+                    child: const Text(
+                      "Buscar",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
