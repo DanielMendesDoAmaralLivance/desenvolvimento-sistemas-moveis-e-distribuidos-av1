@@ -1,10 +1,9 @@
 import 'package:fast_location/src/modules/home/components/last_searched_address_data.dart';
 import 'package:fast_location/src/modules/home/components/last_searched_address_empty_state.dart';
 import 'package:fast_location/src/modules/home/controller/home_controller.dart';
-import 'package:fast_location/src/modules/home/model/address_model.dart';
+import 'package:fast_location/src/routes/app_routes.dart';
 import 'package:fast_location/src/shared/colors/app_colors.dart';
 import 'package:fast_location/src/shared/components/address_list/address_list.dart';
-import 'package:fast_location/src/shared/components/address_list/address_list_item.dart';
 import 'package:fast_location/src/shared/components/app_bar/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -21,128 +20,30 @@ class _HomePageState extends State<HomePage> {
   final _zipCodeController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _controller.listAddresses();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
       backgroundColor: AppColors.background,
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            _buildLastSearchedAddressSection(),
-            const SizedBox(height: 20),
-            _buildSearchAddressButton(),
-            AddressList(
-              addresses: [
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-                AddressModel(
-                  zipCode: "08320-170",
-                  publicPlace: "Rua João Mateus Rendon",
-                  neighborhood: "Parque São Rafael",
-                  locality: "São Paulo",
-                  state: "SP",
-                ),
-              ],
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              _buildLastSearchedAddressSection(),
+              const SizedBox(height: 20),
+              _buildSearchAddressButton(),
+              const SizedBox(height: 60),
+              _buildShortHistorySection(),
+              const SizedBox(height: 20),
+              _buildGoToFullListButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -169,6 +70,42 @@ class _HomePageState extends State<HomePage> {
       ),
       child: const Text(
         'Localizar endereço',
+        style: TextStyle(fontSize: 16, color: Colors.white),
+      ),
+    );
+  }
+
+  Widget _buildShortHistorySection() {
+    return Column(
+      children: [
+        Text(
+          "Últimos endereços buscados",
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: AppColors.theme,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Observer(
+          builder: (_) {
+            return AddressList(addresses: _controller.addresses);
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGoToFullListButton() {
+    return ElevatedButton(
+      onPressed:
+          () => Navigator.of(context).pushReplacementNamed(AppRoutes.history),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.theme,
+        minimumSize: const Size(double.infinity, 50),
+      ),
+      child: const Text(
+        'Visualizar histórico completo',
         style: TextStyle(fontSize: 16, color: Colors.white),
       ),
     );
