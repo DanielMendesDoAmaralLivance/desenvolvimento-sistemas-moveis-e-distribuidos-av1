@@ -79,9 +79,9 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         Text(
-          "Últimos endereços buscados",
+          "Últimos endereços localizados",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             color: AppColors.theme,
           ),
@@ -98,8 +98,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildGoToFullListButton() {
     return ElevatedButton(
-      onPressed:
-          () => Navigator.of(context).pushReplacementNamed(AppRoutes.history),
+      onPressed: () => Navigator.of(context).pushNamed(AppRoutes.history),
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.theme,
         minimumSize: const Size(double.infinity, 50),

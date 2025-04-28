@@ -10,13 +10,20 @@ class AddressList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      shrinkWrap: true,
-      itemCount: addresses.length,
-      separatorBuilder: (context, index) => const Divider(height: 1),
-      itemBuilder: (context, index) {
-        return AddressListItem(address: addresses[index]);
-      },
-    );
+    return true
+        ? Text(
+          "Nenhum endereço encontrado!",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.start,
+        )
+        : ListView.separated(
+          shrinkWrap: true,
+          itemCount: addresses.length,
+          separatorBuilder: (context, index) => const Divider(height: 1),
+          itemBuilder: (context, index) {
+            return AddressListItem(address: addresses[index]);
+          },
+          physics: NeverScrollableScrollPhysics(),
+        );
   }
 }

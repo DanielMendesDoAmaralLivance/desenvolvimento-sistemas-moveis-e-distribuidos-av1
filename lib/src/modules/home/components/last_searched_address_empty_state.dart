@@ -33,8 +33,12 @@ class _LastSearchedAddressEmptyStateState
           const SizedBox(height: 15),
           const Text(
             'Faça uma busca para localizar seu destino',
+            style: TextStyle(
+              color: AppColors.theme,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
           ),
         ],
       ),

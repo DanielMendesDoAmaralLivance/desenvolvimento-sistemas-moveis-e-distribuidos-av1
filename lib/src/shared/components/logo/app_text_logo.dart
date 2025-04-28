@@ -13,6 +13,7 @@ class AppTextLogo extends StatelessWidget {
         fontWeight: FontWeight.bold,
         color: AppColors.theme,
       ),
+      textAlign: TextAlign.center,
     );
   }
 }

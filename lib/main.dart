@@ -1,3 +1,4 @@
+import 'package:fast_location/src/modules/history/page/history_page.dart';
 import 'package:fast_location/src/modules/home/model/address_model.dart';
 import 'package:fast_location/src/modules/home/page/home_page.dart';
 import 'package:fast_location/src/modules/initial/page/initial_page.dart';
@@ -31,7 +32,10 @@ class FastLocationApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.theme),
       ),
       debugShowCheckedModeBanner: false,
-      routes: {AppRoutes.home: (context) => const HomePage()},
+      routes: {
+        AppRoutes.home: (context) => const HomePage(),
+        AppRoutes.history: (context) => const HistoryPage(),
+      },
       // home: const InitialPage(), VOLTAR ISSO AQUI DEPOIS, TIREI SO PARA FICAR MAIS FACIL PARA FAZER TESTES
       home: const HomePage(),
     );

@@ -19,7 +19,7 @@ dependencies:
   path_provider: ^2.0.2
   path_provider_android: ^2.0.14
   path_provider_ios: ^2.0.9
-  map_launcher: ^3.5.0
+  map_launcher: ^3.5.0 # Estávamos tendo problemas com a versão ^2.2.1+1. Por isso, instalamos esta.
   geocoding: ^2.1.1
 
 dev_dependencies:
