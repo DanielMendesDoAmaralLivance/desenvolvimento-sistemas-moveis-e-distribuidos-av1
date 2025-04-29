@@ -29,10 +29,13 @@ class _HistoryPageState extends State<HistoryPage> {
       backgroundColor: AppColors.background,
       body: Observer(
         builder: (_) {
-          if (_controller.isLoading || _controller.hasError) {
+          if (_controller.isLoading ||
+              _controller.hasError ||
+              _controller.addresses.isEmpty) {
             return AppFeedback(
               isLoading: _controller.isLoading,
               hasError: _controller.hasError,
+              isEmpty: _controller.addresses.isEmpty,
             );
           }
 

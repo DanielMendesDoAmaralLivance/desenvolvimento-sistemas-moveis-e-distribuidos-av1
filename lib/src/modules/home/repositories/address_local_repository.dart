@@ -1,4 +1,6 @@
 import 'package:fast_location/src/modules/home/model/address_model.dart';
+import 'package:fast_location/src/shared/storage/app_boxes.dart';
+import 'package:fast_location/src/shared/storage/app_local_storage.dart';
 import 'package:hive/hive.dart';
 
 class AddressLocalRepository {
@@ -17,10 +19,8 @@ class AddressLocalRepository {
   }
 
   Future<Box<AddressModel>> _openBox() async {
-    if (!Hive.isBoxOpen(boxName)) {
-      return await Hive.openBox<AddressModel>(boxName);
-    }
-
-    return Hive.box<AddressModel>(boxName);
+    return await AppLocalStorage.openBox<AddressModel>(
+      AppBoxes.searchedAddresses,
+    );
   }
 }

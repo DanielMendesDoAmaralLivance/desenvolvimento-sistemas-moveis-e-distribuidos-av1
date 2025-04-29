@@ -1,24 +1,17 @@
 import 'package:fast_location/src/modules/history/page/history_page.dart';
-import 'package:fast_location/src/modules/home/model/address_model.dart';
 import 'package:fast_location/src/modules/home/page/home_page.dart';
 import 'package:fast_location/src/modules/initial/page/initial_page.dart';
 import 'package:fast_location/src/routes/app_routes.dart';
 import 'package:fast_location/src/shared/colors/app_colors.dart';
+import 'package:fast_location/src/shared/storage/app_local_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 
 void main() async {
-  await setupHive();
-
-  runApp(const FastLocationApp());
-}
-
-Future<void> setupHive() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Hive.initFlutter();
-  Hive.registerAdapter(AddressModelAdapter());
-  await Hive.openBox<AddressModel>('searched_addresses');
+  await AppLocalStorage.setupHive();
+
+  runApp(const FastLocationApp());
 }
 
 class FastLocationApp extends StatelessWidget {
