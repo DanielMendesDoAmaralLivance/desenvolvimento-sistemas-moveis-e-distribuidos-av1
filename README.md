@@ -2,6 +2,8 @@
 
 **Fast Location App** é um aplicativo Flutter simples e funcional que permite a consulta de endereços por meio de seus CEPs, além de ser possível traçar rotas até o último endereço consultado. Ele também salva o histórico de buscas localmente usando Hive e MobX para gerenciamento de estado.
 
+[Veja o vídeo do app clicando aqui](https://drive.google.com/file/d/1gK3xqJwLrrR9k2uH2qoKM_jE_fZh30yF/view?usp=sharing)
+
 ## 📦 Dependências
 
 O projeto utiliza as seguintes dependências principais:
