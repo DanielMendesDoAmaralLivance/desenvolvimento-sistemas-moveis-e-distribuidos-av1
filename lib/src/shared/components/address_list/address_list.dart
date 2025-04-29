@@ -10,7 +10,7 @@ class AddressList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return true
+    return addresses.isEmpty
         ? Text(
           "Nenhum endereço encontrado!",
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),

@@ -17,7 +17,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: AppColors.themeLight,
         elevation: 0,
         title:
-            title != null
+            title != null && title!.trim() != ""
                 ? Text(
                   title!,
                   style: TextStyle(

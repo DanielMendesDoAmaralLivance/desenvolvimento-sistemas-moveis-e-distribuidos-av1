@@ -13,14 +13,22 @@ abstract class _HistoryControllerBase with Store {
   bool isLoading = false;
 
   @observable
+  bool hasError = false;
+
+  @observable
   ObservableList<AddressModel> addresses = ObservableList<AddressModel>();
 
   @action
   Future<void> listAddresses() async {
-    isLoading = true;
-    var data = await addressService.list();
-    data = data.reversed.toList();
-    addresses = ObservableList<AddressModel>.of(data);
-    isLoading = false;
+    try {
+      isLoading = true;
+      var data = (await addressService.list()).reversed.toList();
+      addresses = ObservableList<AddressModel>.of(data);
+    } catch (e) {
+      hasError = true;
+    } finally {
+      await Future.delayed(const Duration(seconds: 1));
+      isLoading = false;
+    }
   }
 }

@@ -1,5 +1,5 @@
 name: fast_location
-description: "A new Flutter project."
+description: "Aplicativo para consulta de CEP e Endereços"
 publish_to: 'none'
 
 version: 1.0.0+1

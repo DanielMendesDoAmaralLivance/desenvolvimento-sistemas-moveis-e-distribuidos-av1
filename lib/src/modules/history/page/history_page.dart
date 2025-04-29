@@ -29,14 +29,17 @@ class _HistoryPageState extends State<HistoryPage> {
       backgroundColor: AppColors.background,
       body: Observer(
         builder: (_) {
+          if (_controller.isLoading || _controller.hasError) {
+            return AppFeedback(
+              isLoading: _controller.isLoading,
+              hasError: _controller.hasError,
+            );
+          }
+
           return SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.all(20),
-              child: Observer(
-                builder: (_) {
-                  return AddressList(addresses: _controller.addresses);
-                },
-              ),
+              child: AddressList(addresses: _controller.addresses),
             ),
           );
         },

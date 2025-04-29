@@ -10,8 +10,8 @@ class AddressService {
     return await addressLocalRepository.list();
   }
 
-  Future<int> create(AddressModel address) async {
-    return await addressLocalRepository.create(address);
+  Future<void> create(AddressModel address) async {
+    await addressLocalRepository.create(address);
   }
 
   Future<AddressModel?> getFromZipCodeAsync(String zipCode) async {

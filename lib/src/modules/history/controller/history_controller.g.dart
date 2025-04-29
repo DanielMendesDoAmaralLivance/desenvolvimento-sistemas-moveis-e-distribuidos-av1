@@ -25,6 +25,22 @@ mixin _$HistoryController on _HistoryControllerBase, Store {
     });
   }
 
+  late final _$hasErrorAtom =
+      Atom(name: '_HistoryControllerBase.hasError', context: context);
+
+  @override
+  bool get hasError {
+    _$hasErrorAtom.reportRead();
+    return super.hasError;
+  }
+
+  @override
+  set hasError(bool value) {
+    _$hasErrorAtom.reportWrite(value, super.hasError, () {
+      super.hasError = value;
+    });
+  }
+
   late final _$addressesAtom =
       Atom(name: '_HistoryControllerBase.addresses', context: context);
 
@@ -53,6 +69,7 @@ mixin _$HistoryController on _HistoryControllerBase, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
+hasError: ${hasError},
 addresses: ${addresses}
     ''';
   }

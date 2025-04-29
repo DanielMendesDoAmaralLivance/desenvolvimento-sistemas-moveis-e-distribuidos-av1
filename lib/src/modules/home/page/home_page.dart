@@ -5,8 +5,12 @@ import 'package:fast_location/src/routes/app_routes.dart';
 import 'package:fast_location/src/shared/colors/app_colors.dart';
 import 'package:fast_location/src/shared/components/address_list/address_list.dart';
 import 'package:fast_location/src/shared/components/app_bar/custom_app_bar.dart';
+import 'package:fast_location/src/shared/components/app_feedback/app_feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:map_launcher/map_launcher.dart';
+import 'package:mobx/mobx.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,10 +23,31 @@ class _HomePageState extends State<HomePage> {
   final _controller = HomeController();
   final _zipCodeController = TextEditingController();
 
+  late ReactionDisposer _disposer;
+
   @override
   void initState() {
     super.initState();
+
     _controller.listAddresses();
+
+    _disposer = reaction<bool>((_) => _controller.hasErrorOnSearchAddress, (
+      hasError,
+    ) {
+      if (hasError) {
+        final errorMessage = _controller.errorMessageOnSearchAddress;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Erro ao localizar o destino: $errorMessage"),
+            duration: Duration(seconds: 6),
+          ),
+        );
+
+        _controller.hasErrorOnSearchAddress = false;
+        _controller.errorMessageOnSearchAddress = null;
+      }
+    });
   }
 
   @override
@@ -30,22 +55,34 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: CustomAppBar(),
       backgroundColor: AppColors.background,
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              _buildLastSearchedAddressSection(),
-              const SizedBox(height: 20),
-              _buildSearchAddressButton(),
-              const SizedBox(height: 60),
-              _buildShortHistorySection(),
-              const SizedBox(height: 20),
-              _buildGoToFullListButton(),
-            ],
-          ),
-        ),
+      body: Observer(
+        builder: (_) {
+          if (_controller.isLoading || _controller.hasError) {
+            return AppFeedback(
+              isLoading: _controller.isLoading,
+              hasError: _controller.hasError,
+            );
+          }
+
+          return SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  _buildLastSearchedAddressSection(),
+                  const SizedBox(height: 20),
+                  _buildSearchAddressButton(),
+                  const SizedBox(height: 60),
+                  _buildShortHistorySection(),
+                  const SizedBox(height: 20),
+                  _buildGoToFullListButton(),
+                ],
+              ),
+            ),
+          );
+        },
       ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -110,6 +147,75 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _buildBottomNavigationBar() {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: AppColors.background,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withAlpha(50),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, -3),
+          ),
+        ],
+      ),
+      child: Center(
+        child: Container(
+          height: 50,
+          width: 50,
+          decoration: const BoxDecoration(
+            color: AppColors.theme,
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.navigation, color: Colors.white),
+            onPressed: () async {
+              if (_controller.lastAddressSearched != null) {
+                try {
+                  final addressQuery =
+                      "${_controller.lastAddressSearched!.publicPlace}, ${_controller.lastAddressSearched!.neighborhood}, ${_controller.lastAddressSearched!.locality}, ${_controller.lastAddressSearched!.state}";
+
+                  List<Location> locations = await locationFromAddress(
+                    addressQuery,
+                  );
+
+                  final availableMaps = await MapLauncher.installedMaps;
+
+                  await availableMaps.first.showMarker(
+                    coords: Coords(
+                      locations.first.latitude,
+                      locations.first.longitude,
+                    ),
+                    title: addressQuery,
+                  );
+                  return;
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Erro ao traçar a rota até o seu destino!'),
+                      duration: Duration(seconds: 6),
+                    ),
+                  );
+                }
+              }
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    'Você precisa fazer uma busca para localizar seu destino antes de traçar a rota até ele!',
+                  ),
+                  duration: Duration(seconds: 6),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
   void _showSearchAddressFromZipCodeDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -151,6 +257,8 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       _controller.searchAddress(_zipCodeController.text);
 
+                      _zipCodeController.clear();
+
                       Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
@@ -172,5 +280,11 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _disposer();
+    super.dispose();
   }
 }

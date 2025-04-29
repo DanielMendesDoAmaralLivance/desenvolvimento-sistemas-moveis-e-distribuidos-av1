@@ -28,9 +28,9 @@ class AddressModel {
   });
 
   AddressModel.fromJson(Map<String, dynamic> json)
-    : zipCode = json["cep"] ?? '',
-      publicPlace = json["logradouro"] ?? '',
-      neighborhood = json["bairro"] ?? '',
-      locality = json["localidade"] ?? '',
-      state = json["uf"] ?? '';
+    : zipCode = json["cep"],
+      publicPlace = json["logradouro"],
+      neighborhood = json["bairro"],
+      locality = json["localidade"],
+      state = json["uf"];
 }
