@@ -1,5 +1,6 @@
 import 'package:fast_location/src/modules/home/components/last_searched_address_data.dart';
 import 'package:fast_location/src/modules/home/components/last_searched_address_empty_state.dart';
+import 'package:fast_location/src/modules/home/components/short_history.dart';
 import 'package:fast_location/src/modules/home/controller/home_controller.dart';
 import 'package:fast_location/src/routes/app_routes.dart';
 import 'package:fast_location/src/shared/colors/app_colors.dart';
@@ -73,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 20),
                   _buildSearchAddressButton(),
                   const SizedBox(height: 60),
-                  _buildShortHistorySection(),
+                  ShortHistory(addresses: _controller.addresses),
                   const SizedBox(height: 20),
                   _buildGoToFullListButton(),
                 ],
@@ -109,27 +110,6 @@ class _HomePageState extends State<HomePage> {
         'Localizar endereço',
         style: TextStyle(fontSize: 16, color: Colors.white),
       ),
-    );
-  }
-
-  Widget _buildShortHistorySection() {
-    return Column(
-      children: [
-        Text(
-          "Últimos endereços localizados",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: AppColors.theme,
-          ),
-        ),
-        const SizedBox(height: 20),
-        Observer(
-          builder: (_) {
-            return AddressList(addresses: _controller.addresses);
-          },
-        ),
-      ],
     );
   }
 
