@@ -6,6 +6,7 @@ import 'package:fast_location/src/routes/app_routes.dart';
 import 'package:fast_location/src/shared/colors/app_colors.dart';
 import 'package:fast_location/src/shared/components/app_bar/custom_app_bar.dart';
 import 'package:fast_location/src/shared/components/app_feedback/app_feedback.dart';
+import 'package:fast_location/src/shared/metrics/app_metrics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:geocoding/geocoding.dart';
@@ -66,7 +67,7 @@ class _HomePageState extends State<HomePage> {
 
           return SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(AppMetrics.mainContainerPadding),
               child: Column(
                 children: [
                   _buildLastSearchedAddressSection(),
