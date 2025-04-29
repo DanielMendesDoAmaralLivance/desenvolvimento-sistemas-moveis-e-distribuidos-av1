@@ -20,7 +20,7 @@ class FastLocationApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Fast Location App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.theme),
       ),
@@ -29,8 +29,7 @@ class FastLocationApp extends StatelessWidget {
         AppRoutes.home: (context) => const HomePage(),
         AppRoutes.history: (context) => const HistoryPage(),
       },
-      // home: const InitialPage(), VOLTAR ISSO AQUI DEPOIS, TIREI SO PARA FICAR MAIS FACIL PARA FAZER TESTES
-      home: const HomePage(),
+      home: const InitialPage(),
     );
   }
 }

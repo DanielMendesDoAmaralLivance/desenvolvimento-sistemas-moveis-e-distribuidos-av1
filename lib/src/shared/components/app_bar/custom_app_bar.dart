@@ -3,10 +3,10 @@ import 'package:fast_location/src/shared/components/logo/app_full_logo_horizonta
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  String? title;
-  bool showBackButton = false;
+  final String? title;
+  final bool? showBackButton;
 
-  CustomAppBar({super.key, this.title, this.showBackButton = false});
+  const CustomAppBar({super.key, this.title, this.showBackButton});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                 ),
-        leading: showBackButton ? _buildBackButton(context) : null,
+        leading: showBackButton == true ? _buildBackButton(context) : null,
         automaticallyImplyLeading: false,
       ),
     );

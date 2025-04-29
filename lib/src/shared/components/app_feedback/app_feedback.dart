@@ -2,28 +2,28 @@ import 'package:fast_location/src/shared/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppFeedback extends StatelessWidget {
-  bool isLoading = false;
+  final bool? isLoading;
 
-  bool hasError = false;
-  String? errorMessage;
+  final bool? hasError;
+  final String? errorMessage;
 
-  bool isEmpty = false;
+  final bool? isEmpty;
 
-  AppFeedback({
+  const AppFeedback({
     super.key,
-    this.isLoading = false,
-    this.hasError = false,
+    this.isLoading,
+    this.hasError,
     this.errorMessage,
-    this.isEmpty = false,
+    this.isEmpty,
   });
 
   @override
   Widget build(BuildContext context) {
-    return hasError
+    return hasError == true
         ? _buildHasError(context)
-        : isLoading
+        : isLoading == true
         ? _buildIsLoading(context)
-        : isEmpty
+        : isEmpty == true
         ? _buildIsEmpty(context)
         : Container();
   }

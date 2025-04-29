@@ -4,7 +4,6 @@ import 'package:fast_location/src/modules/home/components/short_history.dart';
 import 'package:fast_location/src/modules/home/controller/home_controller.dart';
 import 'package:fast_location/src/routes/app_routes.dart';
 import 'package:fast_location/src/shared/colors/app_colors.dart';
-import 'package:fast_location/src/shared/components/address_list/address_list.dart';
 import 'package:fast_location/src/shared/components/app_bar/custom_app_bar.dart';
 import 'package:fast_location/src/shared/components/app_feedback/app_feedback.dart';
 import 'package:flutter/material.dart';
