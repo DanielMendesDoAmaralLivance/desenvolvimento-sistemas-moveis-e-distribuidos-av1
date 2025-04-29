@@ -1,4 +1,5 @@
 import 'package:fast_location/src/shared/colors/app_colors.dart';
+import 'package:fast_location/src/shared/metrics/app_text_metrics.dart';
 import 'package:flutter/material.dart';
 
 class LastSearchedAddressEmptyState extends StatefulWidget {
@@ -35,7 +36,7 @@ class _LastSearchedAddressEmptyStateState
             'Faça uma busca para localizar seu destino',
             style: TextStyle(
               color: AppColors.theme,
-              fontSize: 20,
+              fontSize: AppTextMetrics.large,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,

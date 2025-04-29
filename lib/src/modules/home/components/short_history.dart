@@ -1,6 +1,7 @@
 import 'package:fast_location/src/modules/home/model/address_model.dart';
 import 'package:fast_location/src/shared/colors/app_colors.dart';
 import 'package:fast_location/src/shared/components/address_list/address_list.dart';
+import 'package:fast_location/src/shared/metrics/app_text_metrics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -22,7 +23,7 @@ class _ShortHistoryState extends State<ShortHistory> {
         Text(
           "Últimos endereços localizados",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: AppTextMetrics.large,
             fontWeight: FontWeight.bold,
             color: AppColors.theme,
           ),

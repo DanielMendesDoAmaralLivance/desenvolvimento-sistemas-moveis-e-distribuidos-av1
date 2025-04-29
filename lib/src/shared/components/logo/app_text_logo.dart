@@ -1,4 +1,5 @@
 import 'package:fast_location/src/shared/colors/app_colors.dart';
+import 'package:fast_location/src/shared/metrics/app_text_metrics.dart';
 import 'package:flutter/material.dart';
 
 class AppTextLogo extends StatelessWidget {
@@ -9,7 +10,7 @@ class AppTextLogo extends StatelessWidget {
     return Text(
       "Fast Location App",
       style: TextStyle(
-        fontSize: 25,
+        fontSize: AppTextMetrics.xLarge,
         fontWeight: FontWeight.bold,
         color: AppColors.theme,
       ),

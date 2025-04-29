@@ -7,6 +7,7 @@ import 'package:fast_location/src/shared/colors/app_colors.dart';
 import 'package:fast_location/src/shared/components/app_bar/custom_app_bar.dart';
 import 'package:fast_location/src/shared/components/app_feedback/app_feedback.dart';
 import 'package:fast_location/src/shared/metrics/app_metrics.dart';
+import 'package:fast_location/src/shared/metrics/app_text_metrics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:geocoding/geocoding.dart';
@@ -108,7 +109,7 @@ class _HomePageState extends State<HomePage> {
       ),
       child: const Text(
         'Localizar endereço',
-        style: TextStyle(fontSize: 16, color: Colors.white),
+        style: TextStyle(fontSize: AppTextMetrics.regular, color: Colors.white),
       ),
     );
   }
@@ -122,7 +123,7 @@ class _HomePageState extends State<HomePage> {
       ),
       child: const Text(
         'Visualizar histórico completo',
-        style: TextStyle(fontSize: 16, color: Colors.white),
+        style: TextStyle(fontSize: AppTextMetrics.regular, color: Colors.white),
       ),
     );
   }
@@ -212,7 +213,10 @@ class _HomePageState extends State<HomePage> {
               children: [
                 const Text(
                   "Digite o CEP",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                  style: TextStyle(
+                    fontSize: AppTextMetrics.regular,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
@@ -247,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                     child: const Text(
                       "Buscar",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: AppTextMetrics.regular,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

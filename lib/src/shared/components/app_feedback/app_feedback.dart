@@ -1,4 +1,5 @@
 import 'package:fast_location/src/shared/colors/app_colors.dart';
+import 'package:fast_location/src/shared/metrics/app_text_metrics.dart';
 import 'package:flutter/material.dart';
 
 class AppFeedback extends StatelessWidget {
@@ -59,13 +60,16 @@ class AppFeedback extends StatelessWidget {
             const SizedBox(height: 24),
             Text(
               errorMessage ?? "Ocorreu um erro",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              style: const TextStyle(
+                fontSize: AppTextMetrics.medium,
+                fontWeight: FontWeight.w500,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
             const Text(
               'Por favor, recarregue o aplicativo ou tente novamente mais tarde.',
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              style: TextStyle(fontSize: AppTextMetrics.regular),
               textAlign: TextAlign.center,
             ),
           ],
@@ -120,7 +124,10 @@ class AppFeedback extends StatelessWidget {
             const SizedBox(height: 24),
             Text(
               "Não há nada por aqui ainda!",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              style: const TextStyle(
+                fontSize: AppTextMetrics.medium,
+                fontWeight: FontWeight.w500,
+              ),
               textAlign: TextAlign.center,
             ),
           ],

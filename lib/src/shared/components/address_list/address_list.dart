@@ -1,5 +1,6 @@
 import 'package:fast_location/src/modules/home/model/address_model.dart';
 import 'package:fast_location/src/shared/components/address_list/address_list_item.dart';
+import 'package:fast_location/src/shared/metrics/app_text_metrics.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -13,7 +14,10 @@ class AddressList extends StatelessWidget {
     return addresses.isEmpty
         ? Text(
           "Nenhum endereço encontrado!",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: AppTextMetrics.regular,
+            fontWeight: FontWeight.bold,
+          ),
           textAlign: TextAlign.start,
         )
         : ListView.separated(
