@@ -4,8 +4,6 @@ import 'package:fast_location/src/shared/storage/app_local_storage.dart';
 import 'package:hive/hive.dart';
 
 class AddressLocalRepository {
-  static const String boxName = 'searched_addresses';
-
   Future<List<AddressModel>> list() async {
     final box = await _openBox();
 
